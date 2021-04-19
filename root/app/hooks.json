@@ -1,0 +1,28 @@
+[
+  {
+    "id": "docker-compose",
+    "execute-command": "/app/run-hook-docker-compose.sh",
+    "command-working-directory": "/app",
+    "include-command-output-in-response": true,
+    "pass-arguments-to-command": [
+      {
+        "source": "url",
+        "name": "app"
+      },
+      {
+        "source": "url",
+        "name": "version"
+      }
+    ],
+    "trigger-rule": {
+      "match": {
+        "type": "value",
+        "value": "<YOUR-GENERATED-TOKEN>",
+        "parameter": {
+          "source": "url",
+          "name": "token"
+        }
+      }
+    }
+  }
+]
