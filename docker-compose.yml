@@ -2,7 +2,7 @@ version: "3.7"
 
 services:
   webhook:
-    build: ./
+    image: ball6847/webhook-docker-compose:0.1.0
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     ports:
