@@ -17,12 +17,16 @@ services:
       COMPOSE_PROJECT_NAME: webhook
       GIT_PRIVATE_KEY_FILE: /run/secrets/git_private_key
       WEBHOOK_MATCH_TOKEN_FILE: /run/secrets/webhook_token_file
+      DIGITALOCEAN_TOKEN_FILE: /run/secrets/digitalocean_token_file
     secrets:
       - git_private_key
       - webhook_token_file
+      - digitalocean_token_file
 
 secrets:
   git_private_key:
     file: "${GIT_PRIVATE_KEY_FILE}"
   webhook_token_file:
     file: webhook_token.txt
+  digitalocean_token_file:
+    file: digitalocean_token.txt

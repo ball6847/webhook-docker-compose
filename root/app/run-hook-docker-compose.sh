@@ -58,6 +58,19 @@ then
     exit 1;
 fi
 
+# login digitaloceans container registry if necessary
+if [ -f "$DIGITALOCEAN_TOKEN_FILE" ];
+then
+    DIGITALOCEAN_TOKEN=`cat $DIGITALOCEAN_TOKEN_FILE`
+fi
+
+if [ ! -z "$DIGITALOCEAN_TOKEN" ];
+then
+    echo "Logging in to digitalocean container registry"
+    DIGITALOCEAN_TOKEN_EXPIRY=${DIGITALOCEAN_TOKEN_EXPIRY:-300}
+    doctl registry login --access-token "$DIGITALOCEAN_TOKEN" --expiry-seconds $DIGITALOCEAN_TOKEN_EXPIRY
+fi
+
 if [ ! -z "$SERVICE" ] && [ ! -z "$VERSION" ];
 then
     echo "Updating variable file"
