@@ -39,6 +39,9 @@ then
 else
     echo "Updating working tree from remote"
     cd $GIT_CLONE_DIR
+    # make sure it's clean before doing git pull
+    git clean -fd
+    git checkout .
     git pull origin master
 fi
 
@@ -58,7 +61,7 @@ fi
 if [ ! -z "$SERVICE" ] && [ ! -z "$VERSION" ];
 then
     echo "Updating variable file"
-    jq ".${SERVICE} = \"${VERSION}\"" "$VAR_FILE" | sponge "$VAR_FILE"
+    jq ".[\"${SERVICE}\"] = \"${VERSION}\"" "$VAR_FILE" | sponge "$VAR_FILE"
 fi
 
 echo "Applying docker-compose changes"
